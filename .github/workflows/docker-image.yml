@@ -25,9 +25,9 @@ jobs:
         uses: PaulHatch/semantic-version@v4.0.3
         with:
           major_pattern: "major:"
-          minor_pattern: "minor:"
+          minor_pattern: "feat:"
           format: "${major}.${minor}.${patch}.${increment}"
-          id: version
+        id: version
       - name: Docker login
         env:
           DOCKER_USER: ${{ secrets.DOCKER_USER }}
