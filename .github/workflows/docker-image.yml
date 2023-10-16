@@ -1,0 +1,33 @@
+name: Docker Image CI
+#Este acción se va a disparar cada vez que se haga un PR o push a la rama main
+#o cada vez que se ejecute este archivo
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      #Son la series de pasos para conseguir un objetivo en especifico, o los pasos
+      #para automatizar procesos de despliegue
+      - name: Checkout code
+        uses: actions/checkout@v3
+        #Busca a fondo todos los commits
+        with:
+          deep: 0
+      - name: Docker login
+        env:
+          DOCKER_USER: ${{ secrets.DOCKER_USER }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: |
+          echo "INICIANDO LOGIN"
+          docker login -u $DOCKER_USER  -p $DOCKER_PASSWORD
+          echo "FINALIZANDO LOGIN"
+    # - name: Build the Docker image
+    #   run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
