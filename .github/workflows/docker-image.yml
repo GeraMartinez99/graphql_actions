@@ -37,7 +37,7 @@ jobs:
           echo "INICIANDO LOGIN"
           docker login -u $DOCKER_USER  -p $DOCKER_PASSWORD
           echo "FINALIZANDO LOGIN"
-          echo $NEW_VERSION
+          echo "NEW VERSION: ${NEW_VERSION}"
       # - name: Build image
       #   run: | 
       #     docker build -t gera990606/graphql:0.0.1 .
